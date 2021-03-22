@@ -1,0 +1,60 @@
+
+ import java.util.*;
+class calc
+{
+void complete_tym(int job_2darray[][],int size)
+{
+
+int completion_tym[] = new int[size];
+int turn_around_tym[] = new int[size];
+int waiting_tym[] = new int[size];
+System.out.println("Complete time \t Turn around tym \tWaiting tym");
+completion_tym = job_2darray[0][1];
+
+for(int i = 1;i< size;i++)
+{
+if(job_2darray[i][0] <= completion_tym[i-1]){
+completion_tym[i] = completion_tym[i-1]+job_2darray[i][1];
+}
+else
+{
+completion_tym[i] = completion_tym[i][0]+job_2darray[i][1];
+}
+}
+for(int i =0;i<size;i++)
+{
+turn_around_tym[i] = (completion_tym[i]-job_2darray[i][0]);
+waiting_tym[i] = (turn_around_tym[i]-job_2darray[i][1]);
+System.out.println("completion_tym[i] \t turn_around_tym[i] \t waiting_tym[i]");
+}
+}
+
+}
+public class JobScheduler
+{
+public static void main(String args[])
+{
+Scanner scan_instance = new Scanner(System.in);
+System.out.println("enter size");
+int size = scan_instance.nextInt();
+calc object = new calc();
+System.out.println("enter arriaval + burst tym");
+int job_2darray[][] = new int[20][2];
+try
+{
+for(int i = 0;i < size;i++)
+{
+for(int j = 0;j < 2;j++)
+{
+job_2darray[i][j] = scan_instance.nextInt();
+}
+}
+}
+catch(Exception e)
+{
+System.out.println("ERROR IN MAIN FUNCTION");
+}
+object.complete_tym(job_2darray,size);
+scan_instance.close();
+}
+}
